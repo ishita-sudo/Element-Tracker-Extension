@@ -1,6 +1,5 @@
 (function () {
-  if (document.getElementById('element-inspector-span')) {
-    console.warn('Inspector already active.');
+  if (window.__inspectorMouseMove || document.getElementById('element-inspector-span')) {
     return;
   }
 
@@ -20,6 +19,7 @@
   });
   document.body.appendChild(infoSpan);
 
+  // Save mousemove listener to global for later removal
   window.__inspectorMouseMove = (event) => {
     const el = document.elementFromPoint(event.clientX, event.clientY);
     if (!el || el === infoSpan) {
@@ -28,7 +28,7 @@
     }
 
     const tag = el.tagName.toLowerCase();
-    infoSpan.textContent = `<${tag}>`;
+    infoSpan.textContent = `<${tag}`;
 
     infoSpan.style.left = `${event.clientX + 10}px`;
     infoSpan.style.top = `${event.clientY + 10}px`;
