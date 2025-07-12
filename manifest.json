@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Element Inspector",
+  "version": "1.0",
+  "description": "Tracks HTML elements on web pages.",
+  "permissions": ["scripting", "activeTab","storage"],
+  "host_permissions": ["<all_urls>"],
+  "action":{
+    "default_popup":"popup.html"
+   
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["inspector.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
